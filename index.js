@@ -43,6 +43,7 @@ app.post('/api/shorturl', (request, response) => {
   const {url} = request.body
   const dnsName = url.split('/')[2]
   const urlNumber = Math.round(Math.random() * 10000)
+  const urlProtocol = url.split('/')[0]
   const verifyReg = (url) => {
     const checkIndex = urlShortered.findIndex(index => index.original_url === url.original_url)
     //console.log(checkIndex, urlShortered)
@@ -54,7 +55,8 @@ app.post('/api/shorturl', (request, response) => {
     }
   }
   dns.lookup(dnsName, (err, address, family) => {
-    if(err || url.split('/')[0] !== 'https') {
+    console.log(urlProtocol.slice(0,5))
+    if(err || urlProtocol.split(':')[0] !== 'https') {
    return response.json({error: 'invalid url'})
     } 
     const urlReg = {original_url: url, short_url: urlNumber}
