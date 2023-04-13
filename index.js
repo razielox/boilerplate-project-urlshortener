@@ -24,7 +24,7 @@ app.get('/api/hello', function(req, res) {
 });
 
 app.get('/api/shorturl/:shortId', (request, response) => {
-  const short_url = request.params.shortId
+  const short_url = Number(request.params.shortId)
   const verifyId = (url) => {
 
     const checkIndex = urlShortered.findIndex(index => index.short_url === url)
