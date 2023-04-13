@@ -54,7 +54,7 @@ app.post('/api/shorturl', (request, response) => {
     }
   }
   dns.lookup(dnsName, (err, address, family) => {
-    if(err) {
+    if(err || url.split('/')[0] !== 'https') {
    return response.json({error: 'invalid url'})
     } 
     const urlReg = {original_url: url, short_url: urlNumber}
